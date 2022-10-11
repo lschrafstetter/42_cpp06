@@ -6,7 +6,7 @@
 #    By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 08:55:21 by lschrafs          #+#    #+#              #
-#    Updated: 2022/10/07 15:05:27 by lschrafs         ###   ########.fr        #
+#    Updated: 2022/10/11 10:23:11 by lschrafs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS 			= 	-Wall -Wextra -Werror
 SRCS_PATH 	= 	./src/
 
 SRCS_NAMES	= 	main.cpp \
-								
+								Converter.cpp \
 
 OBJS_PATH		= 	./obj/
 OBJS_NAMES	= 	$(SRCS_NAMES:%.cpp=%.o)
