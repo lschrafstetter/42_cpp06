@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:53:11 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/12 13:16:51 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:31:08 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,23 @@ void identify(Base *p) {
 }
 
 void identify(Base &p) {
+	Base tmp;
+	
   try {
-    dynamic_cast<A &>(p);
+    tmp = dynamic_cast<A &>(p);
+		(void) tmp;
     std::cout << "Class A" << std::endl;
   } catch (std::bad_cast &e) {
   }
   try {
-    dynamic_cast<B &>(p);
+    tmp = dynamic_cast<B &>(p);
+		(void) tmp;
     std::cout << "Class B" << std::endl;
   } catch (std::bad_cast &e) {
   }
   try {
-    dynamic_cast<C &>(p);
+    tmp = dynamic_cast<C &>(p);
+		(void) tmp;
     std::cout << "Class C" << std::endl;
   } catch (std::bad_cast &e) {
   }
