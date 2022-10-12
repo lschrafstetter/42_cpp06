@@ -6,12 +6,12 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:06:49 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/12 11:19:40 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:28:47 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERTER_H
-#define CONVERTER
+#define CONVERTER_H
 
 #include <iostream>
 #include <string>
