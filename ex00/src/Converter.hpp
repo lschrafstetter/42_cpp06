@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:06:49 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/11 14:13:59 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:19:40 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <iostream>
 #include <string>
 #include <climits>
+#include <cmath>
+#include <iomanip>
 
 enum e_type {
 	UNDETERMINED,
@@ -24,7 +26,7 @@ enum e_type {
 	INT,
 	FLOAT,
 	DOUBLE,
-	NAN,
+	NAN_,
 	INF
 };
 

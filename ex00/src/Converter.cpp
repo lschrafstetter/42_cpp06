@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:06:46 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/11 14:55:13 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:23:03 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ std::string Converter::get_arg(void) const { return this->arg_; }
 void Converter::set_arg(const std::string &str) {
   this->arg_ = str;
   this->type_ = UNDETERMINED;
-  std::cout << "Set Converter's argument to '" << str << "'! Type was reset!"
-            << std::endl;
 }
 
 e_type Converter::get_type(void) const { return this->type_; }
@@ -49,7 +47,7 @@ void Converter::determine_type_(void) {
     type_ = CHAR;
     return;
   } else if (this->arg_ == "nan" || this->arg_ == "nanf") {
-    type_ = NAN;
+    type_ = NAN_;
     return;
   } else if (this->arg_ == "+inf" || this->arg_ == "-inf" ||
              this->arg_ == "+inff" || this->arg_ == "-inff") {
@@ -88,7 +86,6 @@ void Converter::determine_int_double_float_(std::string str) {
 
 void Converter::print_conversions(void) {
   if (this->type_ == UNDETERMINED) this->determine_type_();
-  std::cout << "type of arg: " << this->type_ << std::endl;
   switch (this->type_) {
     case INVALID:
       std::cout << "This input makes no sense!" << std::endl;
@@ -105,7 +102,7 @@ void Converter::print_conversions(void) {
     case DOUBLE:
       this->print_conversions_double_();
       break;
-    case NAN:
+    case NAN_:
       this->print_conversions_nan_();
       break;
     case INF:
@@ -119,7 +116,7 @@ void Converter::print_conversions(void) {
 void Converter::print_conversions_char_(void) const {
   char c = this->arg_.at(0);
   if (std::isprint(c))
-    std::cout << "char: " << c << std::endl;
+    std::cout << "char: '" << c << "'" << std::endl;
   else
     std::cout << "char: Non displayable" << std::endl;
   std::cout << "int: " << static_cast<int>(c) << std::endl;
@@ -136,89 +133,113 @@ void Converter::print_conversions_int_(void) const {
   int i = check;
   if (i >= CHAR_MIN && i <= CHAR_MAX) {
     if (std::isprint(i))
-      std::cout << "char: " << static_cast<char>(i) << std::endl;
+      std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
     else
       std::cout << "char: Non displayable" << std::endl;
   } else {
     std::cout << "char: impossible" << std::endl;
   }
   std::cout << "int: " << i << std::endl;
-  std::cout << "float: " << static_cast<float>(i) << std::endl;
-  std::cout << "double: " << static_cast<double>(i) << std::endl;
+
+  // Write float conversion
+  std::cout << "float: " << static_cast<float>(i);
+  if (i < 1000000)
+    std::cout << ".0f" << std::endl;
+  else
+    std::cout << "f" << std::endl;
+
+  // Write float conversion
+  std::cout << "double: " << static_cast<double>(i);
+  if (i < 1000000)
+    std::cout << ".0" << std::endl;
+  else
+    std::cout << std::endl;
 }
 
 void Converter::print_conversions_double_(void) const {
   double d = std::strtod(this->arg_.c_str(), NULL);
 
-	// Write char conversion
-	if (d >= CHAR_MIN && d < CHAR_MAX + 1) {
-		char c = static_cast<char>(d);
+  // Write char conversion
+  if (d >= CHAR_MIN && d < CHAR_MAX + 1) {
+    char c = static_cast<char>(d);
     if (std::isprint(c))
-      std::cout << "char: " << c << std::endl;
+      std::cout << "char: '" << c << "'" << std::endl;
     else
       std::cout << "char: Non displayable" << std::endl;
   } else {
     std::cout << "char: impossible" << std::endl;
   }
 
-	// Write int conversion
-	if (d < INT_MIN || d > INT_MAX)
-		std::cout << "int: impossible" << std::endl;
-	else
-		 std::cout << "int: " << static_cast<int>(d) << std::endl;
+  // Write int conversion
+  if (d < INT_MIN || d > INT_MAX)
+    std::cout << "int: impossible" << std::endl;
+  else
+    std::cout << "int: " << static_cast<int>(d) << std::endl;
 
-	// Write float conversion
+  // Write float conversion
+  double tmp;
   std::cout << "float: " << static_cast<float>(d);
-	if (d == (int)d) {
-		std::cout << ".0f" << std::endl;
-	} else {
-		std::cout << "f" << std::endl;
-	}
+  if (modf(d, &tmp) == 0 && d < 999999.5) {
+    std::cout << ".0f" << std::endl;
+  } else {
+    std::cout << "f" << std::endl;
+  }
 
-	// Write float conversion
+  // Write float conversion
   std::cout << "double: " << d;
-	if (d == (int)d) {
-		std::cout << ".0";
-	}
-	std::cout << std::endl;
+  if (modf(d, &tmp) == 0 && d < 999999.5) {
+    std::cout << ".0";
+  }
+  std::cout << std::endl;
 }
 
 void Converter::print_conversions_float_(void) const {
-	float f = strtof(this->arg_.c_str(), NULL);
-	
-	// Write char conversion
-	if (f >= CHAR_MIN && f < CHAR_MAX + 1) {
-		char c = static_cast<char>(f);
+  float f = strtof(this->arg_.c_str(), NULL);
+
+  // Write char conversion
+  if (f >= CHAR_MIN && f < CHAR_MAX + 1) {
+    char c = static_cast<char>(f);
     if (std::isprint(c))
-      std::cout << "char: " << c << std::endl;
+      std::cout << "char: '" << c << "'" << std::endl;
     else
       std::cout << "char: Non displayable" << std::endl;
   } else {
     std::cout << "char: impossible" << std::endl;
   }
-	
-	// Write int conversion
-	if (f < INT_MIN || f > INT_MAX)
-		std::cout << "int: impossible" << std::endl;
-	else
-		std::cout << "int: " << static_cast<int>(f) << std::endl;
-		 
-	// Write float conversion
-  std::cout << "float: " << f;
-	if (f == (int)f) {
-		std::cout << ".0f" << std::endl;
-	} else {
-		std::cout << "f" << std::endl;
-	}
 
-	// Write double
+  // Write int conversion
+  if (f < INT_MIN || f > INT_MAX)
+    std::cout << "int: impossible" << std::endl;
+  else
+    std::cout << "int: " << static_cast<int>(f) << std::endl;
+
+  // Write float conversion
+  double tmp;
+  std::cout << "float: " << f;
+  if (modf(f, &tmp) == 0 && f < 999999.5) {
+    std::cout << ".0f" << std::endl;
+  } else {
+    std::cout << "f" << std::endl;
+  }
+
+  // Write double
   std::cout << "double: " << static_cast<double>(f);
-	if (f == (int)f) {
-		std::cout << ".0";
-	}
-	std::cout << std::endl;
+  if (modf(f, &tmp) == 0 && f < 999999.5) {
+    std::cout << ".0";
+  }
+  std::cout << std::endl;
 }
 
-void Converter::print_conversions_nan_(void) const {}
+void Converter::print_conversions_nan_(void) const {
+  std::cout << "char: impossible" << std::endl;
+  std::cout << "int: impossible" << std::endl;
+  std::cout << "float: nanf" << std::endl;
+  std::cout << "double: nan" << std::endl;
+}
 
-void Converter::print_conversions_inf_(void) const {}
+void Converter::print_conversions_inf_(void) const {
+  std::cout << "char: impossible" << std::endl;
+  std::cout << "int: impossible" << std::endl;
+  std::cout << "float: " << this->arg_.at(0) << "inff" << std::endl;
+  std::cout << "double: " << this->arg_.at(0) << "inf" << std::endl;
+}
