@@ -6,18 +6,18 @@
 #    By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 08:55:21 by lschrafs          #+#    #+#              #
-#    Updated: 2022/10/07 15:05:27 by lschrafs         ###   ########.fr        #
+#    Updated: 2022/10/12 13:02:32 by lschrafs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 				= 	convert
+NAME 				= 	identify
 COMPILER 		= 	c++
 CFLAGS 			= 	-Wall -Wextra -Werror
 
 SRCS_PATH 	= 	./src/
 
 SRCS_NAMES	= 	main.cpp \
-								
+								Base.cpp \
 
 OBJS_PATH		= 	./obj/
 OBJS_NAMES	= 	$(SRCS_NAMES:%.cpp=%.o)
