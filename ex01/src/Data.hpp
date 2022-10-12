@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:34:38 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/12 11:37:06 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:50:19 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+#include <stdint.h>
 
 class Data {
  public:

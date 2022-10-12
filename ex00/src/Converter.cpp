@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:06:46 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/12 11:23:03 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:48:52 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void Converter::print_conversions_char_(void) const {
 }
 
 void Converter::print_conversions_int_(void) const {
-  long int check = std::strtol(this->arg_.c_str(), NULL, 10);
+  long int check = strtol(this->arg_.c_str(), NULL, 10);
   if (check > INT_MAX || check < INT_MIN) {
     std::cout << "Error: input is an INT, but overflowed." << std::endl;
     return;
@@ -157,7 +157,7 @@ void Converter::print_conversions_int_(void) const {
 }
 
 void Converter::print_conversions_double_(void) const {
-  double d = std::strtod(this->arg_.c_str(), NULL);
+  double d = strtod(this->arg_.c_str(), NULL);
 
   // Write char conversion
   if (d >= CHAR_MIN && d < CHAR_MAX + 1) {

@@ -6,13 +6,13 @@
 #    By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 08:55:21 by lschrafs          #+#    #+#              #
-#    Updated: 2022/10/11 10:23:11 by lschrafs         ###   ########.fr        #
+#    Updated: 2022/10/12 14:47:42 by lschrafs         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 				= 	convert
 COMPILER 		= 	c++
-CFLAGS 			= 	-Wall -Wextra -Werror
+CFLAGS 			= 	-Wall -Wextra -Werror -std=c++98
 
 SRCS_PATH 	= 	./src/
 
