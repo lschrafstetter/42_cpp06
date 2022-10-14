@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:06:46 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/14 10:24:35 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/14 13:32:17 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void Converter::print_conversions_int_(void) const {
   else
     std::cout << "f" << std::endl;
 
-  // Write float conversion
+  // Write double conversion
   std::cout << "double: " << static_cast<double>(i);
   if (i < 1000000)
     std::cout << ".0" << std::endl;
@@ -260,7 +260,7 @@ void Converter::print_conversions_inf_(void) const {
   }
   // Float infinity?
   else if (!this->arg_.compare(1, 5, "inff")) {
-    float f = std::numeric_limits<double>::infinity();
+    float f = std::numeric_limits<float>::infinity();
     if (this->arg_.at(0) == '-') f = -f;
     std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(f) << std::endl;
