@@ -6,7 +6,7 @@
 /*   By: lschrafs <lschrafs@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:06:46 by lschrafs          #+#    #+#             */
-/*   Updated: 2022/10/12 14:48:52 by lschrafs         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:20:36 by lschrafs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,13 +233,36 @@ void Converter::print_conversions_float_(void) const {
 void Converter::print_conversions_nan_(void) const {
   std::cout << "char: impossible" << std::endl;
   std::cout << "int: impossible" << std::endl;
-  std::cout << "float: nanf" << std::endl;
-  std::cout << "double: nan" << std::endl;
+  // Double nan?
+  if (this->arg_ == "nan") {
+    double d = std::numeric_limits<double>::quiet_NaN();
+    std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
+    std::cout << "double: " << d << std::endl;
+  }
+  // Float nan?
+  else if (this->arg_ == "nanf") {
+    float f = std::numeric_limits<float>::quiet_NaN();
+    std::cout << "float: " << f << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(f) << std::endl;
+  }
 }
 
 void Converter::print_conversions_inf_(void) const {
   std::cout << "char: impossible" << std::endl;
   std::cout << "int: impossible" << std::endl;
-  std::cout << "float: " << this->arg_.at(0) << "inff" << std::endl;
-  std::cout << "double: " << this->arg_.at(0) << "inf" << std::endl;
+
+  // Double infinity?
+  if (!this->arg_.compare(1, 4, "inf")) {
+    double d = std::numeric_limits<double>::infinity();
+    if (this->arg_.at(0) == '-') d = -d;
+    std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
+    std::cout << "double: " << d << std::endl;
+  }
+  // Float infinity?
+  else if (!this->arg_.compare(1, 5, "inff")) {
+    float f = std::numeric_limits<double>::infinity();
+    if (this->arg_.at(0) == '-') f = -f;
+    std::cout << "float: " << f << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(f) << std::endl;
+  }
 }
